@@ -1,0 +1,14 @@
+syntax = "proto2";
+package screen;
+
+message Payload {
+	optional string contrast_ratio = 1;
+	optional string viewing_tech = 2;
+	optional string color_depth = 3;
+	optional string touch_type = 4;
+	optional int32 ntsc = 5;
+	optional int32 temperature = 6;
+	optional int32 backlight_longevity = 7;
+	optional int32 luminance = 8;
+
+}
