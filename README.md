@@ -23,7 +23,7 @@ https://www.bevywise.com/mqtt-broker/
 2.  Copy custom_store.py to Bevywise/MQTTRoute/extensions/
 3. In the  the method "handle_Received_Payload()" in Bevywise/MQTTRoute/extensions/custom_store.py, replace the imported ProtoBuf class name with the one used. If required this method can be modified. (Note: If the sample screen_pb2.py is used, modifications to custom_store.py are not required.)
 4. Set CUSTOMSTORAGE = ENABLED in Bevywise/MQTTRoute/conf/data_store.conf
-5. Google protobuf needs to be installed in MQTTRoute/lib. This can be done by either copying the directory 'google' into MQTTRoute/lib or by installing it via pip into the lib folder ($ pip install protobuf -t MQTTRoute/lib)
+5. Google protobuf needs to be installed in MQTTRoute/lib. This can be done by either extracting google.zip and copying the directory 'google' into MQTTRoute/lib or by installing it via pip into the lib folder ($ pip install protobuf -t MQTTRoute/lib)
 6. Run MQTTRoute
 	In Linux based machines,
 	$ cd Bevywise/MQTTRoute/bin
