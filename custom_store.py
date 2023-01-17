@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.11
 
 ################################################################
 # @Bevywise.com IOT Initiative. All rights reserved 
@@ -12,6 +12,7 @@
 # 
 # The parameter data will be in dict format and the keys are 'sender','topic', 'message', 'unixtime', 'timestamp'
 #
+# Requires: protobuf==4.21.12
 ################################################################
 
 
@@ -22,16 +23,13 @@
 #
 global db_cursor
 
-#
-# elasstic_search cursor. 
-#
 global elastic_search
 
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 elastic_search = Elasticsearch("localhost", port = 9200, max_retries = 0)
 
-from datetime import datetime
+import datetime
 import json
 import ast
 import os, sys
@@ -140,12 +138,12 @@ def handle_Received_Payload(data):
 # 	try :
 # 		data[es_msg_type[type(es_msg)]] = es_msg
 # 		del data["message"]
-# 		# date_time = datetime.strptime(data["timestamp"], "%Y-%m-%d %H:%M:%S")
+# 		# date_time = datetime.datetime.strptime(data["timestamp"], "%Y-%m-%d %H:%M:%S")
 # 		# print(date_time, type(date_time))
 # 		# data["timestamp"] = date_time
 # 		# print(data, data["message-dict"]["bid"], type(data["message-dict"]["bid"]))
 
-# 		data["timestamp"] = datetime.now()
+# 		data["timestamp"] = datetime.datetime.now()
 # 		elastic_search.index(index= "bevywise", doc_type = 'recv_payload', body = data)
 # 	except Exception as e :
 # 		print(e, 97)
