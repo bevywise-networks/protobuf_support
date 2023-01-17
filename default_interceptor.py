@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3.11
 #################################################################
 # @Bevywise.com IOT Initiative. All rights reserved 
 # www.bevywise.com Email - support@bevywise.com
@@ -63,9 +63,10 @@ def on_before_send(client,topic_name,data):
 			setattr(new_data,key,value)
 		try:
 			encoded_data = new_data.SerializeToString()
-			print("Serialized Data:")
-			import binascii
-			print(binascii.hexlify(encoded_data))
+			encoded_data = str(encoded_data)
+			print("Serialized Data:", encoded_data)
+			# import binascii
+			# print(binascii.hexlify(encoded_data))
 
 		except Exception as e:
 			print("ERR:(on_before_send) serialize error:",e)
