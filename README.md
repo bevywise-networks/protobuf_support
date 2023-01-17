@@ -1,6 +1,7 @@
+
 # Extensions for ProtoBuf support
 
-This file documents the steps to add Python support for MQTT payload of ProtoBuf type in Bevywise IoT Simulator and Bevywise MQTT broker.
+This file documents the steps to add Python3.11 support for MQTT payload of ProtoBuf type in Bevywise IoT Simulator and Bevywise MQTT broker.
 
 ## ProtoBuf
 _Protocol buffers_ are Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data.
@@ -10,20 +11,20 @@ _Protocol buffers_ are Google's language-neutral, platform-neutral, extensible m
 2. Compile the .proto file using protobuf compiler. 
 		$ protoc --python_out=. screen.proto
 		The compiler generates a Python file.(screen_pb2.py)
-	(Note:) Protobuf compiler can be installed using:
-		$ sudo apt install protobuf-compiler
+	(Note:) Refer https://grpc.io/docs/protoc-installation/ to install the latest version of Protobuf compiler.
+	
 
 ## Bevywise MQTTRoute
 Bevywise MQTTRoute is a highly extendable & reliable MQTT Broker fuelling powerful data management to build large scale IoT applications / solutions.
 https://www.bevywise.com/mqtt-broker/
 
-### Add ProtoBuf support to MQTTRoute
+### Add ProtoBuf support to Bevywise MQTTRoute
 
 1. Copy the compiled protoBuf Python class file (eg. screen_pb2.py) to Bevywise/MQTTRoute/extensions/
 2.  Copy custom_store.py to Bevywise/MQTTRoute/extensions/
 3. In the  the method "handle_Received_Payload()" in Bevywise/MQTTRoute/extensions/custom_store.py, replace the imported ProtoBuf class name with the one used. If required this method can be modified. (Note: If the sample screen_pb2.py is used, modifications to custom_store.py are not required.)
 4. Set CUSTOMSTORAGE = ENABLED in Bevywise/MQTTRoute/conf/data_store.conf
-5. Google protobuf needs to be installed in MQTTRoute/lib. This can be done by either extracting google.zip and copying the directory 'google' into MQTTRoute/lib or by installing it via pip into the lib folder ($ pip install protobuf -t MQTTRoute/lib)
+5. Google protobuf needs to be installed in MQTTRoute/lib. This can be done by installing it via pip into the lib folder ($ pip install protobuf==4.21.12 -t MQTTRoute/lib)
 6. Run MQTTRoute
 	In Linux based machines,
 	$ cd Bevywise/MQTTRoute/bin
@@ -33,7 +34,7 @@ https://www.bevywise.com/mqtt-broker/
 Bevywise IoT Simulator is a simulation tool to simulate tens of thousands of MQTT clients in a single box.
 https://www.bevywise.com/iot-simulator/
 
-### Add ProtoBuf support to IoT Simulator
+### Add ProtoBuf support to Bevywise IoT Simulator
 
 1. Copy the compiled protoBuf class file (eg. screen_pb2.py) to Bevywise/IoTSimulator/lib folder.
 2.  Copy default_interceptor.py to Bevywise/IoTSimulator/extensions/
@@ -52,3 +53,6 @@ https://www.bevywise.com/iot-simulator/
 	{"luminance": "100-1000-RANGE", "color_depth": "65M-CONSTANT", "temperature": "1-100-RANGE", "ntsc": "45-60-RANGE", "contrast_ratio": "200:1-CONSTANT", "backlight_longevity": "20000-60000-RANGE", "touch_type": "capacitive-CONSTANT", "viewing_tech": "oled-CONSTANT"}
 
 
+### Store data in custom store
+Deserialized data will be available in handle_Received_Payload() method in Bevywise/MQTTRoute/extensions/custom_store.py
+This method handle_Received_Payload() can be extended to store the deserialized data in any database of your choice.
